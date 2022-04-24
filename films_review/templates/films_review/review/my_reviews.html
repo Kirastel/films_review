@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+    <div class="pb-1 mb-4 border-bottom">
+        <h2>My reviews</h2>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+    {% if my_reviews %}
+        {% for review in my_reviews %}
+            {% include 'films_review/review/review_card.html' %}
+        {% endfor %}
+    {% else %}
+        <h4>I haven't written reviews yet.</h4>
+    {% endif %}
+    {% include 'films_review/pagination.html' %}
+{% endblock content %}

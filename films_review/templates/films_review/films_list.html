@@ -1,0 +1,32 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+{% block page_header %}
+    <div class="pb-1 mb-4 border-bottom">
+        <h2>
+            {% if request.GET.order == 'recent'  %}Recently published films
+            {% elif request.GET.order == 'popular' %}Most reviewed films
+            {% elif request.GET.order == 'best_rated' %}Best rated films
+            {% else %}Films
+            {% endif %}
+        </h2>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+    {% if paginator.count %}
+
+        <ul>
+            {% for film in page_obj %}
+
+                <li>{% include 'films_review/film_card.html' %}</li>
+            {% endfor %}
+        </ul>
+
+        {% include 'films_review/pagination.html' %}
+
+    {% else %}
+        <h4>There are no published films in app database.</h4>
+    {% endif %}
+{% endblock content %}
+

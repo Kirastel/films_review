@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block page_header %}
+    <div class="pb-1 mb-4 border-bottom">
+        <h2>{{film.title}}</h2>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+    <div>
+        <div class="row g-3 mb-3" style="border: 0.125rem solid transparent">
+            <div class="col-sm-auto mt-sm-0">
+                <img src="{{ film.small_img.url }}" class="card-img rounded {% if film.small_img.url|slice:'-22:' == 'default.jpg' %}border{% endif %} d-block d-sm-none" alt="{{ film.title }}">
+            </div>
+            <div class="col-sm container-fluid pt-1 mt-sm-0">
+
+                <div class="row g-0">
+                    {% if film.is_released %}
+                        <div class="col-auto order-md-1">
+                            <p>
+                                {% if film.avg_rating %}
+                                    Rating: {{film.avg_rating|floatformat:2}}
+                                    (<a class="film-field-link" href="{{film.get_absolute_url}}#reviews">{{film.review_set.count}} review{{film.review_set.count|pluralize}}</a>)
+                                {% else %}
+                                    Unrated
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% endif %}
+
+                    <div class="col-md order-md-0">
+                        <p>Director:
+                            {% for director in film.director.all %}
+                                <a class="text-nowrap film-field-link" href="{% url 'films_review:search' %}?q={{director}}&category=director">{{director}}</a>{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+
+                        </p>
+                        <p>Writer:
+                            {% for writer in film.writer.all %}
+                                <a class="text-nowrap film-field-link" href="{% url 'films_review:search' %}?q={{writer}}&category=writer">{{writer}}</a>
+                            {% endfor %}
+
+                        </p>
+                    </div>
+                </div>
+
+                {% if film.original_title and film.original_title != film.title %}
+                <p>Original title: «{{ film.original_title }}»</p>
+                {% endif %}
+                <p>Genre{{ film.genres.all|length|pluralize }}:
+                    {% for genre in film.genres.all %}
+                        <a class="film-field-link" href="{% url 'films_review:search' %}?q={{genre}}&category=genre">{% if forloop.first %}{{ genre }}{% else %}{{genre|lower}}{% endif %}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+                {% if film.is_released %}
+                    <p>Released year: <a class="film-field-link" href="{% url 'films_review:search' %}?q={{films.release_date.year}}&category=year">{{film.release_date.year}}</a></p>
+                {% else %}
+                    <p>Expected at {{film.post_date|date:'F'}} {{film.post_date.day}}, <a class="film-field-link" href="{% url 'films_review:search' %}?q={{film.post_date.year}}&category=year">{{film.post_date.year}}</a></p>
+                {% endif %}
+                <p>Country: {% for country in film.country.all %} <a class="film-field-link" href="{% url 'films_review:search' %}?q={{country.name}}&category=country">{{ country.name }}</a>{% endfor %}</p>
+                <p>Actors:
+                    {% for actor in film.actor.all %}
+                        <a class="film-field-link" href="{% url 'films_review:search' %}?q={{actor}}&category=actor">{{ actor }}</a>
+                    {% endfor %}
+                </p>
+                    <p class="mb-0">Runtime: {{ film.continuance }} min.</p>
+            </div>
+        </div>
+        <div>
+            <a id="description"></a>
+            <h4>Description:</h4>
+            <p>{{film.description}}</p>
+        </div>
+    </div>
+    <a id="reviews"></a>
+    {% if film.is_released %}
+        <div class="row g-0">
+            <div class="col">
+                <h4 style="padding-top: 0.375rem; padding-bottom: 0.375rem;">
+                    {% if reviews %}
+                        <span>Reviews ({{reviews|length}}):</span>
+                    {% else %}
+                        <span>No reviews yet.</span>
+                    {% endif %}
+                </h4>
+            </div>
+
+            <div class="col-auto mb-2">
+                {% if reviews.0.owner != request.user %}
+                    <a href="{% url 'films_review:add_review' film.id film.slug %}" class="btn btn-color">Add new review</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% for review in page_obj %}
+            {% include 'films_review/review/review_card.html' %}
+        {% endfor %}
+    {% else %}
+        <h4>Reviews can be written as soon as the film is published</h4>
+    {% endif %}
+    {% include 'films_review/pagination.html' %}
+{% endblock content %}

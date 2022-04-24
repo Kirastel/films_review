@@ -1,0 +1,50 @@
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-sm-auto">
+            <a href="{{film.get_absolute_url}}">
+<!--                <img src="{{ film.full_img.url }}" class="card-img rounded d-none d-sm-block" alt="{{ film.title }}" style="width: 11.5rem">-->
+                <img src="{{ film.small_img.url }}" class="card-img rounded d-block d-sm-none" alt="{{ film.title }}">
+            </a>
+        </div>
+        <div class="col-sm container-fluid">
+            <div class="card-body">
+
+                <div class="row g-0">
+                    <div class="col-md">
+                        <h5 class="card-title">
+                            <a class="film-title-link" href="{{film.get_absolute_url}}">{{film.title}}</a>
+                        </h5>
+                        <p class="mb-2 mb-md-3">by {% for director in film.director.all %}
+                            {% if request.path == '/search/' and category == 'director' %}
+                                <span class="text-nowrap">{{director}}</span>
+                            {% else %}
+                                <a class="text-nowrap film-field-link" href="{% url 'films_review:search' %}?q={{director}}&category=director">{{director}}</a>{% endif %}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                        </p>
+                    </div>
+
+                    <div class="col-auto mb-3">
+                        {% if film.is_released and film.avg_rating %}
+                            <span>Rating: {{film.avg_rating|floatformat:2}}
+                                (<a class="film-field-link" href="{{film.get_absolute_url}}#reviews">{{film.review_set.count}} review{{film.review_set.count|pluralize}}</a>)</span>
+                        {% elif film.is_released and not film.avg_rating %}
+                            <span>Unrated</span>
+                        {% else %}
+                            <span>{{film.pub_date.day}} {{film.pub_date|date:'F'}} {{film.pub_date.year}}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card-text">
+                    {% if film.description|length > 650 %}
+                        <p>{{ film.description|slice:':650' }}<span id="dots{{ film.id }}">...</span><span class="textContinuation" id="more{{ film.id }}">{{ film.description|slice:'650:'}}</span>
+                            <a class="text-nowrap orange-link" onclick="myFunction({{ film.id }})" id="myBtn{{ film.id }}">Read more</a>
+                        </p>
+                    {% else %}
+                        <p>{{ film.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

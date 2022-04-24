@@ -1,0 +1,58 @@
+{%  extends 'base.html' %}
+{% load static %}
+
+
+{% block page_header %}
+    <div class="pb-1 mb-4 border-bottom">
+        <h2>Search results</h2>
+    </div>
+{% endblock page_header %}
+
+{% block content %}
+    {% if results %}
+        <h4>
+            {% if category == 'film' %} Films found by title
+            {% elif category == 'director' %}Films directed by «{{q}}»
+            {% elif category == 'genre' %}Films in «{{q}}» genre
+            {% elif category == 'actor' %}Films starring this actor «{{q}}»
+            {% elif category == 'writer' %}Scripts by this writer «{{q}}»
+            {% elif category == 'any' %}Films found for «{{q}}» request
+            {% endif %}
+            ({{ paginator.count }}):
+        </h4>
+        <ul>
+            {% for film in page_obj %}
+
+                <li>{% include 'films_review/film_card.html' %}</li>
+
+            {% endfor %}
+        </ul>
+
+    {% elif category in SEARCH_CATEGORIES %}
+
+        <h4>Nothing found for «{{q}}» :(</h4>
+        <div class="d-flex justify-content-center p-2">
+            <img src="{% static 'films_review/img/search.jpg' %}" class="img-fluid" style="max-height: 345px;" alt="">
+        </div>
+
+    {% else %}
+
+        <h4>No such category</h4>
+        <p>
+            Please choose among
+            {% for category in SEARCH_CATEGORIES %}
+                {% if forloop.revcounter > 2 %}
+                    «{{ category }}»,
+                {% elif forloop.revcounter == 2 %}
+                    «{{ category }}» or
+                {% else %}
+                    «{{ category }}».
+                {% endif %}
+            {% endfor %}
+        </p>
+
+    {% endif %}
+
+    {% include 'films_review/pagination.html' %}
+
+{% endblock content %}

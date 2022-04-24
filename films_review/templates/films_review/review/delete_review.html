@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+
+{% block page_header %}
+    <div class="pb-1 mb-4 border-bottom">
+        <h2>Review delete page</h2>
+    </div>
+{% endblock page_header %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete review on «{{film.title}}»?</p>
+        <button class='btn btn-color' name="submit">Yes, delete review</button>
+    </form>
+
+{% endblock content %}

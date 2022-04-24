@@ -1,0 +1,238 @@
+:root {
+    /*Custom colors*/
+    --light-black: #3A3A3A;
+
+    --dark-gray: #666666;
+
+    --medium-green: #21a400;
+    --light-green: #24b800;
+
+    --dark-orange: #e67e00;
+}
+
+/*Body text color and background color*/
+body {
+    color: var(--light-black);
+    background-color: #f4f4f4;
+}
+
+/*Disables default ul style*/
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+
+/*Films links*/
+
+/*Film card title*/
+.film-title-link {
+
+    color: black;
+    text-decoration: none;
+}
+.film-title-link:hover {
+    color: orange;
+}
+
+/*Director, genre, year links*/
+.film-field-link {
+    text-decoration-style: dotted;
+    color: black;
+}
+.film-field-link:hover {
+    color: orange;
+}
+
+/*Orange links*/
+.orange-link {
+    cursor: pointer;
+    color: var(--dark-orange);
+    text-decoration-style: dotted;
+}
+.orange-link:hover {
+    color: orange;
+}
+
+/*Review links*/
+.review-link {
+    color: var(--dark-gray);
+    text-decoration-style: dotted;
+}
+.review-link:hover {
+    color: orange;
+}
+
+/*Navigation links*/
+.navigation-link {
+    color: var(--light-black);
+    text-decoration: none;
+    padding: 0.5rem 0.25rem 0.3125rem 0.25rem;
+    margin: 0 0.25rem;
+    border-bottom: 0.1875rem solid white;
+}
+.navigation-link:hover {
+    color: var(--dark-gray);
+    border-bottom: 0.1875rem solid orange;
+}
+.current-navigation-link {
+    border-bottom: 0.1875rem solid var(--medium-green);
+}
+
+@media screen and (max-width: 992px) {
+    .navigation-link {
+        border-bottom: none;
+    }
+    .navigation-link:hover {
+        border-bottom: none;
+    }
+    .current-navigation-link {
+        color: var(--medium-green);
+        border-bottom: none;
+    }
+}
+
+/*Pagination links*/
+.pagination-item {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+}
+
+.current-pagination {
+    background-color: var(--medium-green);
+    color: white;
+}
+
+.pagination-ellipsis {
+    background-color: white;
+}
+
+.pagination-number-link:hover {
+    color: black;
+    background-color: #ebebeb;
+}
+
+.pagination-arrow-link:hover {
+    color: gray;
+}
+
+
+/*Footer links*/
+.footer-logo-link {
+    color: var(--light-black);
+    text-decoration: none;
+}
+
+.footer-logo-link:hover {
+    color: var(--light-black);
+}
+
+.footer-link {
+    color: var(--light-black);
+    margin: 0 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.footer-link:hover {
+    color: gray;
+}
+
+.footer-icon-link {
+    font-size: 1.5rem;
+    color: var(--dark-gray)
+}
+
+.facebook:hover {
+    color: #4267B2;
+}
+.instagram:hover {
+    color: #E1306C;
+}
+.telegram:hover {
+    color: #0088cc;
+}
+.linkedin:hover {
+    color: #0e76a8;
+}
+.twitter:hover {
+    color: #1DA1F2;
+}
+
+/*Buttons*/
+.btn-color {
+    color: white;
+    background-color: SteelBlue;;
+    border-color: SteelBlue;;
+}
+.btn-color:hover {
+    color: white;
+    background-color: LightSteelBlue;
+    border-color: LightSteelBlue;
+}
+.btn-color:active {
+    color: white;
+    background-color: LightSteelBlue;
+    border-color: LightSteelBlue;
+    box-shadow: none;
+}
+
+
+/*Hides a part of text in read more/read less blocks*/
+.textContinuation {
+    display: none;
+}
+
+/*Disables default asterisk on labels by django-crispy-forms*/
+.asteriskField {
+    display: none;
+}
+
+/*Bootstrap form-control class changes*/
+.form-control:focus {
+        border-color: var(--medium-green);
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    } 
+
+/*Search form style*/
+.search-form:focus {
+        border-color: lightgray;
+        box-shadow: none;
+    } 
+    
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?dkhxm9');
+  src:  url('../fonts/icomoon.eot?dkhxm9#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?dkhxm9') format('truetype'),
+    url('../fonts/icomoon.woff?dkhxm9') format('woff'),
+    url('../fonts/icomoon.svg?dkhxm9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"]::before, [class*=" icon-"]::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
