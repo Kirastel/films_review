@@ -13,11 +13,7 @@ ____
 * After any authentication action (registration, login or logout) user will be redirected to his previous page.
 ____
 ## Technical discription:
-* The project includes 2 applications. These are "User" and "Review Movies". The "User" needs to implement the registration and next user authentication to write a review, the application include a login and registration page. Main application is "Review Movies", it includes search, list view, detail view.
-* View implemented using classes.
-* Search with custom categories.
-* Registrations and authorizations using django libraries.
-* The main template and static is stored in the "Review Movies" application.
+The project implemented product categories, product details, shopping cart and checkout.Check out occurs through the work of forms and with the help of a post request. After adding a product to the cart, the user can go to the cart and place an order, which will be created on the server in the order model.
 
 ____
 ## To run application on local machine:
