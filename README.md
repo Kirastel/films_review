@@ -12,6 +12,14 @@ ____
 * Authenticated users can write reviews, edit or delete them. Every authenticated user has a limit of maximum one review per movie;
 * After any authentication action (registration, login or logout) user will be redirected to his previous page.
 ____
+## Technical discription:
+* The project includes 2 applications. These are "User" and "Review Movies". The "User" needs to implement the registration and next user authentication to write a review, the application include a login and registration page. Main application is "Review Movies", it includes search, list view, detail view.
+* View implemented using classes.
+* Search with custom categories.
+* Registrations and authorizations using django libraries.
+* The main template and static is stored in the "Review Movies" application.
+
+____
 ## To run application on local machine:
 1. Clone the repository:
 ```git clone https://github.com/Kirastel/films_review.git && cd films_review```
